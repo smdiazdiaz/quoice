@@ -1,17 +1,12 @@
 <?php
-	
-	function db_connect(){
-		static $connection;
-		
-		if(!isset($connection)) {
-			$conf = parse_ini_file('E:/USP/Sistemas operacionais/Projeto/QuoICE/config_file.ini');
-			$connection = mysql_connect($conf['host'],$conf['username'],$conf['password']); 
-			$select_db = mysql_select_db(,$conf['dbname']);
-		}
-		
-		if($connection == false){
-			return mysqli_connect_error();
-		}
-	}
+	header('Content-type: text/html; charset=utf-8');
+				$conf = parse_ini_file('config_file.ini');
+				$connection = new mysqli($conf['host'],$conf['username'],$conf['password'],$conf['dbname']);
 
+				//$connection = new mysqli('localhost','root','123456','vitor');
+
+			if(mysqli_connect_errno())
+			{
+				echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			}
 ?>
