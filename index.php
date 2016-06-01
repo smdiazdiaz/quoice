@@ -97,22 +97,22 @@ require_once('controller.php');
 				<!-- /. ROW  estados -->
 				<div class="row">
 					<div class="col-md-12" margin-bottom="20px">
-						<a href="?estado=ac<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">AC</button></a>
-						<button type="button" class="btn btn-lg btn-primary">AL</button>
-						<button type="button" class="btn btn-lg btn-primary">AM</button>
-						<button type="button" class="btn btn-lg btn-primary">AP</button>
-						<button type="button" class="btn btn-lg btn-primary">BA</button>
-						<button type="button" class="btn btn-lg btn-primary">CE</button>
-						<button type="button" class="btn btn-lg btn-primary">DF</button>
-						<button type="button" class="btn btn-lg btn-primary">ES</button>
-						<button type="button" class="btn btn-lg btn-primary">GO</button>
-						<button type="button" class="btn btn-lg btn-primary">MA</button>
-						<button type="button" class="btn btn-lg btn-primary">MG</button>
-						<button type="button" class="btn btn-lg btn-primary">MT</button>
-						<button type="button" class="btn btn-lg btn-primary">PA</button>
-						<button type="button" class="btn btn-lg btn-primary">PR</button>
-						<button type="button" class="btn btn-lg btn-primary">RJ</button>
-						<button type="button" class="btn btn-lg btn-primary">SP</button>
+						<a href="?state=ac<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">AC</button></a>
+						<a href="?state=al<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">AL</button></a>
+						<a href="?state=am<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">AM</button></a>
+						<a href="?state=ba<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">BA</button></a>
+            <a href="?state=ap<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">AP</button></a>
+						<a href="?state=ce<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">CE</button></a>
+						<a href="?state=df<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">DF</button></a>
+						<a href="?state=es<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">ES</button></a>
+						<a href="?state=go<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">GO</button></a>
+						<a href="?state=ma<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">MA</button></a>
+						<a href="?state=mg<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">MG</button></a>
+						<a href="?state=mt<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">MT</button></a>
+						<a href="?state=pq<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">PA</button></a>
+						<a href="?state=pr<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">PR</button></a>
+						<a href="?state=rj<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">RJ</button></a>
+						<a href="?state=sp<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">SP</button></a>
 					</div>
 				</div>
 
@@ -130,88 +130,26 @@ require_once('controller.php');
 
                       <div class="carousel-inner">
 
-                        <div class="item active">
-    											<div class="well" >
-
-    												<img src="img/user.png" alt="" class="img-u image-responsive" />
-
-    												<p class="main-text"><h4>Paulo Maluf</h4></p>
-    												<p>PP</p>
-    												<p>Deputado Estadual</p>
-
-    												<hr />
-    												<p>
-    													<span class=" color-bottom-txt">
-    														<p>Presencia nas sessoes: </p>
-    														<p>Procesos jurídicos: </p>
-    														<p>Renda 2010:
-    															<a href="#" target="_blank">Bens</a> |
-    															<a href="#" target="_blank">Despesas</a>
-    														</p>
-    														<p>Renda 2014:
-    															<a href="#" target="_blank">Bens</a> |
-    															<a href="#" target="_blank">Despesas</a>
-    														</p>
-    													</span>
-    												</p>
-    												<hr />
-    												<div class="col-md-6">
-    													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit gthn.
-    												   Lorem ipsum dolor sit amet, consectetur adipiscing elit gthn.</p>
-    												</div>
-    												<img src="img/graph_ex.jpg" alt=""  />
-
-    											</div>
-    										</div>
-
-                        <div class="item">
-    											<div class="well" >
-
-    												<img src="img/user.png" alt="" class="img-u image-responsive" />
-
-    												<p class="main-text"><h4>Segundo Item</h4></p>
-    												<p>PP</p>
-    												<p>Deputado Estadual</p>
-
-    												<hr />
-    												<p>
-    													<span class=" color-bottom-txt">
-    														<p>Presencia nas sessoes: </p>
-    														<p>Procesos jurídicos: </p>
-    														<p>Renda 2010:
-    															<a href="#" target="_blank">Bens</a> |
-    															<a href="#" target="_blank">Despesas</a>
-    														</p>
-    														<p>Renda 2014:
-    															<a href="#" target="_blank">Bens</a> |
-    															<a href="#" target="_blank">Despesas</a>
-    														</p>
-    													</span>
-    												</p>
-    												<hr />
-    												<div class="col-md-6">
-    													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit gthn.
-    												   Lorem ipsum dolor sit amet, consectetur adipiscing elit gthn.</p>
-    												</div>
-    												<img src="img/graph_ex.jpg" alt=""  />
-
-    											</div>
-    										</div>
-
         <?php
+        $first_item = true;
           /* fetch associative array */
           if ($view_data_array != "")
           {
             foreach ($view_data_array as $row)
             {
-          ?>
-                <div class="item">
+              if ( ( ($view_candidato_id == "") && ($first_item == true) ) || ($row['id'] == $view_candidato_id) )
+                  echo '<div class="item active">';
+              else
+                  echo '<div class="item">';
+
+              $first_item = false;
+                ?>
                     <div class="well" >
 
 												<img src="img/user.png" alt="" class="img-u image-responsive" />
 
-												<p class="main-text"><h4>Item pego no BD</h4></p>
-												<p>PP</p>
+												<p class="main-text"><h4><?php echo $row['nome']?></h4></p>
+												<p>PP <?php echo $row['id'] ?></p>
 												<p>Deputado Estadual</p>
 
 												<hr />

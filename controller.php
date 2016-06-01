@@ -2,7 +2,7 @@
 require_once('db_connection.php');
 $debug = false;
 
-if (isset($debug))
+if ($debug)
   echo 'debug mode<br />';
 
 
@@ -34,38 +34,36 @@ LIMIT 10
 
   // initialize
 
-
   switch ($view_mode)
   {
     case 1: // Maiores Doadores de Campanha
 
-      if ($view_estado != "") {
-        $query = "SELECT candidato.* FROM candidato,candreceitas WHERE situacao='ELEITO' AND candidato.id = candreceitas.id AND estado = ? ORDER BY candreceitas.valor LIMIT 5";
+      if ($view_estado != "")
+      {
+        $query = "SELECT candidato.* FROM candidato,candreceitas WHERE situacao='ELEITO' AND candidato.id = candreceitas.id AND candidato.estado = ? ORDER BY candreceitas.valor LIMIT 20";
       }
       else {
         # code...
-        $query = "SELECT candidato.* FROM candidato,candreceitas WHERE situacao='ELEITO' AND candidato.id = candreceitas.id ORDER BY candreceitas.valor LIMIT 5";
+        $query = "SELECT candidato.* FROM candidato,candreceitas WHERE situacao='ELEITO' AND candidato.id = candreceitas.id ORDER BY candreceitas.valor LIMIT 20";
       }
-
-
       if ($debug)
         echo $query.'<br/>';
     break;
     case 2: // Receitas e Despesas do Partido
     break;
     case 3: // Comparativo de Renda dos Politicos
-      $query = "SELECT candidato.*, SUM(candreceitas.valor) AS sum_valor FROM candidato LEFT JOIN candreceitas ON candidato.id = candreceitas.id WHERE candidato.situacao='ELEITO' GROUP BY candreceitas.id ORDER BY sum_valor DESC LIMIT 10";
+      if ($view_estado != "")
+      {
+        $query = "SELECT candidato.*, SUM(candreceitas.valor) AS sum_valor FROM candidato LEFT JOIN candreceitas ON candidato.id = candreceitas.id WHERE candidato.situacao='ELEITO' AND candidato.estado = ? GROUP BY candreceitas.id ORDER BY sum_valor DESC LIMIT 20";
+      }
+      else {
+        # code...
+        $query = "SELECT candidato.*, SUM(candreceitas.valor) AS sum_valor FROM candidato LEFT JOIN candreceitas ON candidato.id = candreceitas.id WHERE candidato.situacao='ELEITO' GROUP BY candreceitas.id ORDER BY sum_valor DESC LIMIT 20";
+      }
+
     break;
     default: // Maiores Doadores de Campanha
   }
-/*
-  if ($view_estado != "")
-  {
-    $query = $query. ' AND estado=? ';
-  }
-*/
-
-  //$query = $query . ' ORDER BY qdeProcessos LIMIT 5 ';
 
   // prepare
   $stmt= $connection->prepare($query);
