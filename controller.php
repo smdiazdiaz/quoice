@@ -24,45 +24,114 @@ if (isset($_GET["mode"]))
 if (isset($connection))
 {
 
+// Receitas
 /*
 SELECT candidato.*, SUM(candreceitas.valor) AS sum_valor FROM candidato
 LEFT JOIN candreceitas ON candidato.id = candreceitas.id
 WHERE candidato.situacao='ELEITO'
 GROUP BY candreceitas.id ORDER BY sum_valor DESC
-LIMIT 10
+LIMIT 20
+*/
+
+// Despesas
+/*
+SELECT candidato.*, SUM(candreceitas.valor) AS sum_valor FROM candidato
+LEFT JOIN canddespesas ON candidato.id = canddespesas.id
+WHERE candidato.situacao='ELEITO'
+GROUP BY canddespesas.id ORDER BY sum_valor DESC
+LIMIT 20
+*/
+
+// Bens Declarados
+/*
+SELECT candidato.*, SUM(candbens.valor) AS sum_valor FROM candidato
+LEFT JOIN candbens ON candidato.id = candbens.id
+WHERE candidato.situacao='ELEITO'
+GROUP BY candbens.id ORDER BY sum_valor DESC
+LIMIT 20
 */
 
   // initialize
 
   switch ($view_mode)
   {
-    case 1: // Maiores Doadores de Campanha
-
+    case 1: // Receitas
       if ($view_estado != "")
       {
-        $query = "SELECT candidato.* FROM candidato,candreceitas WHERE situacao='ELEITO' AND candidato.id = candreceitas.id AND candidato.estado = ? ORDER BY candreceitas.valor LIMIT 20";
+        $query = "SELECT candidato.*, SUM(candreceitas.valor) AS sum_valor FROM candidato
+        LEFT JOIN candreceitas ON candidato.id = candreceitas.id
+        WHERE candidato.situacao='ELEITO'
+        AND candidato.estado=?
+        GROUP BY candidato.id ORDER BY sum_valor DESC
+        LIMIT 20";
       }
       else {
         # code...
-        $query = "SELECT candidato.* FROM candidato,candreceitas WHERE situacao='ELEITO' AND candidato.id = candreceitas.id ORDER BY candreceitas.valor LIMIT 20";
+        $query = "SELECT candidato.*, SUM(candreceitas.valor) AS sum_valor FROM candidato
+        LEFT JOIN candreceitas ON candidato.id = candreceitas.id
+        WHERE candidato.situacao='ELEITO'
+        GROUP BY candidato.id ORDER BY sum_valor DESC
+        LIMIT 20";
       }
       if ($debug)
         echo $query.'<br/>';
     break;
-    case 2: // Receitas e Despesas do Partido
-    break;
-    case 3: // Comparativo de Renda dos Politicos
+    case 2: // Despesas
       if ($view_estado != "")
       {
-        $query = "SELECT candidato.*, SUM(candreceitas.valor) AS sum_valor FROM candidato LEFT JOIN candreceitas ON candidato.id = candreceitas.id WHERE candidato.situacao='ELEITO' AND candidato.estado = ? GROUP BY candreceitas.id ORDER BY sum_valor DESC LIMIT 20";
+        $query = "SELECT candidato.*, SUM(canddespesas.valor) AS sum_valor FROM candidato
+        LEFT JOIN canddespesas ON candidato.id = canddespesas.id
+        WHERE candidato.situacao='ELEITO'
+        AND candidato.estado=?
+        GROUP BY candidato.id ORDER BY sum_valor DESC
+        LIMIT 20";
       }
       else {
         # code...
-        $query = "SELECT candidato.*, SUM(candreceitas.valor) AS sum_valor FROM candidato LEFT JOIN candreceitas ON candidato.id = candreceitas.id WHERE candidato.situacao='ELEITO' GROUP BY candreceitas.id ORDER BY sum_valor DESC LIMIT 20";
+        $query = "SELECT candidato.*, SUM(canddespesas.valor) AS sum_valor FROM candidato
+        LEFT JOIN canddespesas ON candidato.id = canddespesas.id
+        WHERE candidato.situacao='ELEITO'
+        GROUP BY candidato.id ORDER BY sum_valor DESC
+        LIMIT 20";
       }
-
+    break;
+    case 3: // Bens
+      if ($view_estado != "")
+      {
+        $query = "SELECT candidato.*, SUM(candbens.valor) AS sum_valor FROM candidato
+        LEFT JOIN candbens ON candidato.id = candbens.id
+        WHERE candidato.situacao='ELEITO'
+        AND candidato.estado=?
+        GROUP BY candbens.id ORDER BY sum_valor DESC
+        LIMIT 20";
+      }
+      else {
+        # code...
+        $query = "SELECT candidato.*, SUM(candbens.valor) AS sum_valor FROM candidato
+        LEFT JOIN candbens ON candidato.id = candbens.id
+        WHERE candidato.situacao='ELEITO'
+        GROUP BY candbens.id ORDER BY sum_valor DESC
+        LIMIT 20";
+      }
     break;
     default: // Maiores Doadores de Campanha
+      if ($view_estado != "")
+      {
+        $query = "SELECT candidato.*, SUM(candreceitas.valor) AS sum_valor FROM candidato
+        LEFT JOIN candreceitas ON candidato.id = candreceitas.id
+        WHERE candidato.situacao='ELEITO'
+        AND candidato.estado=?
+        GROUP BY candidato.id ORDER BY sum_valor DESC
+        LIMIT 20";
+      }
+      else {
+        # code...
+        $query = "SELECT candidato.*, SUM(candreceitas.valor) AS sum_valor FROM candidato
+        LEFT JOIN candreceitas ON candidato.id = candreceitas.id
+        WHERE candidato.situacao='ELEITO'
+        GROUP BY candidato.id ORDER BY sum_valor DESC
+        LIMIT 20";
+      }
   }
 
   // prepare

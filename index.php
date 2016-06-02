@@ -34,13 +34,6 @@ require_once('controller.php');
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                    <li>
-                        <a class="active-menu" href="index.html"><i class="fa fa-user"></i>Juan M. Santos</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-user"></i>Alvaro Uribe</a>
-					          </li>
-
           <?php
             /* fetch associative array */
             if ($view_data_array != "")
@@ -48,7 +41,12 @@ require_once('controller.php');
               foreach ($view_data_array as $row)
               {
                 echo '<li>';
-               echo '<a href="#"><i class="fa fa-user"></i>'.utf8_encode($row['nome']).'</a>';
+
+                if ($view_estado != "")
+                  echo '<a href="?state='.$view_estado.'&mode='.$view_mode.'&active='.$row['id'].'"><i class="fa fa-user"></i>'.utf8_encode($row['nome']).'</a>';
+                else
+                  echo '<a href="?mode='.$view_mode.'&active='.$row['id'].'"><i class="fa fa-user"></i>'.utf8_encode($row['nome']).'</a>';
+
                  echo '</li>';
               }
                 /* free result set */
@@ -72,26 +70,25 @@ require_once('controller.php');
                 <div class="row">
                     <div class="col-md-4">
                         <div class="main-box mb-red">
-                            <a href="#">
-                                <h5>Maiores doadores de campanha</h5>
+                            <a href='?&mode=1'>
+                                <h5>Maiores receitas</h5>
                             </a>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="main-box mb-dull">
-                            <a href="#">
-                                <h5>Receitas e despesas dos partidos</h5>
+                            <a href='?mode=2'>
+                                <h5>Maiores despesas</h5>
                             </a>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="main-box mb-pink">
-                            <a href="#">
-                                <h5>Comparativo de renda dos políticos</h5>
+                            <a href='?mode=3'>
+                                <h5>Bens declarados</h5>
                             </a>
                         </div>
                     </div>
-
                 </div>
 
 				<!-- /. ROW  estados -->
@@ -148,8 +145,8 @@ require_once('controller.php');
 
 												<img src="img/user.png" alt="" class="img-u image-responsive" />
 
-												<p class="main-text"><h4><?php echo $row['nome']?></h4></p>
-												<p>PP <?php echo $row['id'] ?></p>
+												<p class="main-text"><h4><?php echo utf8_encode($row['nome'])?></h4></p>
+												<p>PP</p>
 												<p>Deputado Estadual</p>
 
 												<hr />
