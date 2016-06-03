@@ -136,13 +136,11 @@ LIMIT 20
 
   // prepare
   $stmt= $connection->prepare($query);
-
   // bind
   if ($view_estado != "")
   {
     $stmt->bind_param("s",$view_estado);
   }
-
   // execute
   if ( !$stmt->execute() )
   {
@@ -153,15 +151,13 @@ LIMIT 20
     if ($debug)
       echo 'query executed sucessfully<br />';
   }
-
   /* instead of bind_result: */
   $result = $stmt->get_result();
-
   /* now you can fetch the results into an array - NICE */
-
   while ($myrow = $result->fetch_assoc()) {
     $view_data_array[] = $myrow;
   }
+
 
   if ($debug)
   {

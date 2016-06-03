@@ -142,9 +142,9 @@ require_once('controller.php');
               $first_item = false;
                 ?>
                     <div class="well" >
-
-												<img src="img/user.png" alt="" class="img-u image-responsive" />
-
+                        <?php
+                        echo '<img src="data:image/jpeg;base64,'.base64_encode( $row['foto'] ).'" alt="" class="img-u image-responsive"/>';
+                        ?>
 												<p class="main-text"><h4><?php echo utf8_encode($row['nome'])?></h4></p>
 												<p>PP</p>
 												<p>Deputado Estadual</p>
