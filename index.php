@@ -1,6 +1,5 @@
-<?php
-require_once('controller.php');
- ?>
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -18,6 +17,16 @@ require_once('controller.php');
     <link href="css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+    <script type="text/javascript">
+
+    window.onload=function(){
+    document.body.style.cursor='auto';
+    }
+    </script>
+
+    <?php require_once('controller.php') ?>
+
 </head>
 <body>
     <div id="wrapper">
@@ -146,20 +155,20 @@ require_once('controller.php');
                         echo '<img src="data:image/jpeg;base64,'.base64_encode( $row['foto'] ).'" alt="" class="img-u image-responsive"/>';
                         ?>
 												<p class="main-text"><h4><?php echo utf8_encode($row['nome'])?></h4></p>
-												<p>PP</p>
-												<p>Deputado Estadual</p>
+												<p><?php echo $row['SiglaPartido'] ?></p>
+												<p><?php echo $row['NomeCargo'] ?></p>
 
 												<hr />
 												<p>
 													<span class=" color-bottom-txt">
-														<p>Presencia nas sessoes: </p>
-														<p>Procesos jurídicos: </p>
+														<p>Presencia nas sessoes: <?php echo utf8_encode($row['qdeSessoes']) ?></p>
+														<p>Procesos jurídicos: <?php echo utf8_encode($row['qdeProcessos']) ?></p>
 														<p>Renda 2010:
-															<a href="#" target="_blank">Bens</a> |
+															<a href="#" target="_blank">Bens</a> Total: <?php echo round($view_cand_bens_2010[$row['id']]) ?> reais |
 															<a href="#" target="_blank">Despesas</a>
 														</p>
 														<p>Renda 2014:
-															<a href="#" target="_blank">Bens</a> |
+															<a href="#" target="_blank">Bens</a> Total: <?php echo round($view_cand_bens_2014[$row['id']]) ?> reais |
 															<a href="#" target="_blank">Despesas</a>
 														</p>
 													</span>
