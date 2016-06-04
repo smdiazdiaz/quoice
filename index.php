@@ -1,6 +1,5 @@
-<?php
-require_once ('db_connection.php');
- ?>
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -18,6 +17,16 @@ require_once ('db_connection.php');
     <link href="css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+    <script type="text/javascript">
+
+    window.onload=function(){
+    document.body.style.cursor='auto';
+    }
+    </script>
+
+    <?php require_once('controller.php') ?>
+
 </head>
 <body>
     <div id="wrapper">
@@ -34,52 +43,25 @@ require_once ('db_connection.php');
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                    <li>
-                        <a class="active-menu" href="index.html"><i class="fa fa-user"></i>Juan M. Santos</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-user"></i>Alvaro Uribe</a>
-					          </li>
-
           <?php
-          if (!isset($connection))
-          {
-            echo '<li>';
-            echo '<a href="#"><i class="fa fa-user"></i>Alvaro Uribe</a>';
-            echo '</li>';
-          }
-          else
-          {
-            echo '<li>';
-            echo '<a href="#"><i class="fa fa-user"></i>bla</a>';
-            echo '</li>';
-            # code...
-            $query = "select candidato.nome from  candidato order by candidato.qdeProcessos LIMIT 5";
-
-            if ($result = $connection->query($query))
+            /* fetch associative array */
+            if ($view_data_array != "")
             {
-                /* fetch associative array */
-                while ($row = $result->fetch_assoc())
-                {
-                  echo '<li>';
-                 echo '<a href="#"><i class="fa fa-user"></i>'.utf8_encode($row['nome']).'</a>';
-                   echo '</li>';
-                }
+              foreach ($view_data_array as $row)
+              {
+                echo '<li>';
 
-                /* free result set */
-                $result->close();
+                if ($view_estado != "")
+                  echo '<a href="?state='.$view_estado.'&mode='.$view_mode.'&active='.$row['id'].'"><i class="fa fa-user"></i>'.utf8_encode($row['nome']).'</a>';
+                else
+                  echo '<a href="?mode='.$view_mode.'&active='.$row['id'].'"><i class="fa fa-user"></i>'.utf8_encode($row['nome']).'</a>';
 
-                }
-                else {
-                  # code...
-                  echo '<li>';
-                 echo '<a href="#"><i class="fa fa-user"></i>empty</a>';
-                   echo '</li>';
-                }
-
+                 echo '</li>';
               }
-                       ?>
-                </ul>
+                /* free result set */
+              }
+            ?>
+            </ul>
 
             </div>
 
@@ -97,47 +79,46 @@ require_once ('db_connection.php');
                 <div class="row">
                     <div class="col-md-4">
                         <div class="main-box mb-red">
-                            <a href="#">
-                                <h5>Maiores doadores de campanha</h5>
+                            <a href='?&mode=1'>
+                                <h5>Maiores receitas</h5>
                             </a>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="main-box mb-dull">
-                            <a href="#">
-                                <h5>Receitas e despesas dos partidos</h5>
+                            <a href='?mode=2'>
+                                <h5>Maiores despesas</h5>
                             </a>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="main-box mb-pink">
-                            <a href="#">
-                                <h5>Comparativo de renda dos políticos</h5>
+                            <a href='?mode=3'>
+                                <h5>Bens declarados</h5>
                             </a>
                         </div>
                     </div>
-
                 </div>
 
 				<!-- /. ROW  estados -->
 				<div class="row">
 					<div class="col-md-12" margin-bottom="20px">
-						<button type="button" class="btn btn-lg btn-primary">AC</button>
-						<button type="button" class="btn btn-lg btn-primary">AL</button>
-						<button type="button" class="btn btn-lg btn-primary">AM</button>
-						<button type="button" class="btn btn-lg btn-primary">AP</button>
-						<button type="button" class="btn btn-lg btn-primary">BA</button>
-						<button type="button" class="btn btn-lg btn-primary">CE</button>
-						<button type="button" class="btn btn-lg btn-primary">DF</button>
-						<button type="button" class="btn btn-lg btn-primary">ES</button>
-						<button type="button" class="btn btn-lg btn-primary">GO</button>
-						<button type="button" class="btn btn-lg btn-primary">MA</button>
-						<button type="button" class="btn btn-lg btn-primary">MG</button>
-						<button type="button" class="btn btn-lg btn-primary">MT</button>
-						<button type="button" class="btn btn-lg btn-primary">PA</button>
-						<button type="button" class="btn btn-lg btn-primary">PR</button>
-						<button type="button" class="btn btn-lg btn-primary">RJ</button>
-						<button type="button" class="btn btn-lg btn-primary">SP</button>
+						<a href="?state=ac<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">AC</button></a>
+						<a href="?state=al<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">AL</button></a>
+						<a href="?state=am<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">AM</button></a>
+						<a href="?state=ba<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">BA</button></a>
+            <a href="?state=ap<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">AP</button></a>
+						<a href="?state=ce<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">CE</button></a>
+						<a href="?state=df<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">DF</button></a>
+						<a href="?state=es<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">ES</button></a>
+						<a href="?state=go<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">GO</button></a>
+						<a href="?state=ma<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">MA</button></a>
+						<a href="?state=mg<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">MG</button></a>
+						<a href="?state=mt<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">MT</button></a>
+						<a href="?state=pq<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">PA</button></a>
+						<a href="?state=pr<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">PR</button></a>
+						<a href="?state=rj<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">RJ</button></a>
+						<a href="?state=sp<?php echo '&mode='.$view_mode?>"><button type="button" class="btn btn-lg btn-primary">SP</button></a>
 					</div>
 				</div>
 
@@ -149,32 +130,45 @@ require_once ('db_connection.php');
 
 				<div class="row">
 					<div class="col-md-12">
-                        <div class="panel panel-default">
+              <div class="panel panel-default">
 
-                            <div id="carousel-example" class="carousel slide" data-ride="carousel" style="border: 5px solid #e3e3e3;">
+                  <div id="carousel-example" class="carousel slide" data-ride="carousel" style="border: 5px solid #e3e3e3;">
 
-                                <div class="carousel-inner">
+                      <div class="carousel-inner">
 
-										<div class="item active">
-											<div class="well" >
+        <?php
+        $first_item = true;
+          /* fetch associative array */
+          if ($view_data_array != "")
+          {
+            foreach ($view_data_array as $row)
+            {
+              if ( ( ($view_candidato_id == "") && ($first_item == true) ) || ($row['id'] == $view_candidato_id) )
+                  echo '<div class="item active">';
+              else
+                  echo '<div class="item">';
 
-												<img src="img/user.png" alt="" class="img-u image-responsive" />
-
-												<p class="main-text"><h4>Paulo Maluf</h4></p>
-												<p>PP</p>
-												<p>Deputado Estadual</p>
+              $first_item = false;
+                ?>
+                    <div class="well" >
+                        <?php
+                        echo '<img src="data:image/jpeg;base64,'.base64_encode( $row['foto'] ).'" alt="" class="img-u image-responsive"/>';
+                        ?>
+												<p class="main-text"><h4><?php echo utf8_encode($row['nome'])?></h4></p>
+												<p><?php echo $row['SiglaPartido'] ?></p>
+												<p><?php echo $row['NomeCargo'] ?></p>
 
 												<hr />
 												<p>
 													<span class=" color-bottom-txt">
-														<p>Presencia nas sessoes: </p>
-														<p>Procesos jurídicos: </p>
+														<p>Presencia nas sessoes: <?php echo utf8_encode($row['qdeSessoes']) ?></p>
+														<p>Procesos jurídicos: <?php echo utf8_encode($row['qdeProcessos']) ?></p>
 														<p>Renda 2010:
-															<a href="#" target="_blank">Bens</a> |
+															<a href="#" target="_blank">Bens</a> Total: <?php echo round($view_cand_bens_2010[$row['id']]) ?> reais |
 															<a href="#" target="_blank">Despesas</a>
 														</p>
 														<p>Renda 2014:
-															<a href="#" target="_blank">Bens</a> |
+															<a href="#" target="_blank">Bens</a> Total: <?php echo round($view_cand_bens_2014[$row['id']]) ?> reais |
 															<a href="#" target="_blank">Despesas</a>
 														</p>
 													</span>
@@ -189,77 +183,15 @@ require_once ('db_connection.php');
 											</div>
 										</div>
 
+              <?php
+                /* fetch associative array */
+              }
+            }
+                ?>
 
-                                    <div class="item">
-                                        <div class="well" >
 
-												<img src="img/user.png" alt="" class="img-u image-responsive" />
+                  </div>
 
-												<p class="main-text"><h4>Juan M. Santos</h4></p>
-												<p>PP</p>
-												<p>Deputado Estadual</p>
-
-												<hr />
-												<p>
-													<span class=" color-bottom-txt">
-														<p>Presencia nas sessoes: </p>
-														<p>Procesos jurídicos: </p>
-														<p>Renda 2010:
-															<a href="#" target="_blank">Bens</a> |
-															<a href="#" target="_blank">Despesas</a>
-														</p>
-														<p>Renda 2014:
-															<a href="#" target="_blank">Bens</a> |
-															<a href="#" target="_blank">Despesas</a>
-														</p>
-													</span>
-												</p>
-												<hr />
-												<div class="col-md-6">
-													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit gthn.
-												   Lorem ipsum dolor sit amet, consectetur adipiscing elit gthn.</p>
-												</div>
-												<img src="img/graph_ex.jpg" alt=""  />
-
-											</div>
-
-                                    </div>
-                                    <div class="item">
-                                        <div class="well" >
-
-												<img src="img/user.png" alt="" class="img-u image-responsive" />
-
-												<p class="main-text"><h4>Isabel II</h4></p>
-												<p>PP</p>
-												<p>Deputado Estadual</p>
-
-												<hr />
-												<p>
-													<span class=" color-bottom-txt">
-														<p>Presencia nas sessoes: </p>
-														<p>Procesos jurídicos: </p>
-														<p>Renda 2010:
-															<a href="#" target="_blank">Bens</a> |
-															<a href="#" target="_blank">Despesas</a>
-														</p>
-														<p>Renda 2014:
-															<a href="#" target="_blank">Bens</a> |
-															<a href="#" target="_blank">Despesas</a>
-														</p>
-													</span>
-												</p>
-												<hr />
-												<div class="col-md-6">
-													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit gthn.
-												   Lorem ipsum dolor sit amet, consectetur adipiscing elit gthn.</p>
-												</div>
-												<img src="img/graph_ex.jpg" alt=""  />
-
-											</div>
-
-                                    </div>
-
-                                </div>
                                 <!--INDICATORS-->
                                 <ol class="carousel-indicators">
                                     <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
